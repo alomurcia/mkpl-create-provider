@@ -10,7 +10,7 @@ export class LocationsService {
   constructor(private http: HttpClient) { }
 
    getCountries(): Observable<any> {
-    return this.http.get<CountryInterface[]>(`http://localhost:8082/api/country`);
+    return this.http.get<any[]>(`http://localhost:8082/api/country`);
   }
 
   getRegions(countryId: number): Observable<any> {

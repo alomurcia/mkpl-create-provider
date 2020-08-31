@@ -17,11 +17,10 @@ export class ProviderService {
   constructor(private http: HttpClient) { }
 
   createProvider(data: any, cityId: string): Observable<any> {
-   /* return this.http.post(
-      `${environment.BACK_ENDPOINT}/provider?city_id=${cityId}`,
+   return this.http.post(
+      `http://localhost:8081/api/provider?city_id=${cityId}`,
       data
-    );*/
-    return;
+    );
   }
 
   getProviders(page = 0, order = 'id', orderBy = ASC, limit = 10): Observable<Paginator> {

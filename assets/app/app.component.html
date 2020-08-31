@@ -1,5 +1,5 @@
 <div *ngIf="contentStep == 1" class="form-container center column middle">
-    <img class="icon-create-provider m-bottom-8" src="../icons/create-provider.png" alt="Crear proveedor">
+    <img class="icon-create-provider m-bottom-8" src="/o/mkpl-create-provider/icons/create-provider.png" alt="Crear proveedor">
     <h2 class="title-medium tiber bold column center m-bottom-6">Crear proveedores</h2>
     <p class="description-provider deep-sea-green text-big text-center">
         Comienza creando los proveedores actuales y activos en tu empresa. <br> La información que se solicita es de carácter <strong class="bold">*obligatorio</strong> para la correcta creación. Haz clic en Crear proveedor para comenzar.
@@ -28,11 +28,13 @@
                 </app-input-control>
                 <app-input-control formControlName="nit" label="NIT" id="nit" classContainer="m-bottom-9">
                 </app-input-control>
-                <app-select-control formControlName="country" label="País" id="country" classContainer="m-bottom-9">
+                <app-select-control formControlName="country" label="País" id="country" classContainer="m-bottom-9" 
+                    [data]="countries" (valueChange)="changeCountry($event)">
                 </app-select-control>
-                <app-select-control formControlName="region" label="Región" id="region" classContainer="m-bottom-9">
+                <app-select-control formControlName="region" label="Región" id="region" classContainer="m-bottom-9"
+                    [data]="regions" (valueChange)="changeRegion($event)">
                 </app-select-control>
-                <app-select-control formControlName="city" label="Ciudad" id="city" classContainer="m-bottom-9">
+                <app-select-control formControlName="city" label="Ciudad" id="city" classContainer="m-bottom-9" [data]="cities">
                 </app-select-control>
                 <app-input-control formControlName="address" label="Dirección" id="address" classContainer="m-bottom-9">
                 </app-input-control>
@@ -84,13 +86,13 @@
     </form>
 </div>
 
-<modal id="modal-provider" classContent="modal-content" (closeModal)="closeModal('modal-provider')" applyPadding>
+<modal id="modal-provider" class="modal-hidden" classContent="modal-content" (closeModal)="closeModal('modal-provider')" applyPadding>
     <div class="form-container center column middle">
         <div class="header-content width-100 row center middle m-bottom-4">
             <img class="modal-img" [src]="requestError ? '/o/mkpl-create-provider/icons/doc-error.svg' : '/o/mkpl-create-provider/icons/doc-success.svg'" alt="Estado" />
         </div>
         <h2 class="general-title text-center poppins bold m-bottom-4 center column middle" [ngClass]="{ 'deep-sea-green ': !requestError, 'text-error' : requestError }">
-            {{requestError ? '¡Los datos no se guardaron!' : '¡Datos creados!'}}
+            {{requestError ? '¡Los datos no se guardaron!' : 'Proveedor creado!'}}
         </h2>
         <p class="form-subtitle description m-bottom-9 text-center center column middle" [ngClass]="{ 'deep-sea-green ': !requestError, 'text-error' : requestError }">
             {{requestError ? 'Los datos ingresados no fueron guardados, por favor inténtalo nuevamente.' : 'Los datos ingresados se guardaron con éxito'}}

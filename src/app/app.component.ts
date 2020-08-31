@@ -1,16 +1,13 @@
 import LiferayParams from '../types/LiferayParams'
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-//import { Router } from '@angular/router';
 
 import { ProviderService } from './services/provider.service';
-//import { Auth0Service } from 'src/app/services/auth0.service';
 import { ModalService } from './services/modal.service';
 import { FormService } from './services/form.service';
 import { LocationsService } from './services/locations.service';
 
 import { FIELDS } from './constants/constants';
-//import { ROUTES } from './constants/routes';
 
 
 declare const Liferay: any;
@@ -29,39 +26,29 @@ export class AppComponent{
 	 isViewableGeneralForm = true;
 	 isViewableContactForm = false;
 	 requestError = false;
-	 countries:any = [];
-     cities:any = [];
-     regions:any = [];
+	 countries: any[] = [];
+     cities: any[] = [];
+     regions: any[] = [];
 	 currentStep = 1;
 	  contentStep = 2;
 	 loadingRequest = false;
 
 	constructor(
 		private providerService: ProviderService,
-		//public auth: Auth0Service,
 		private modalService: ModalService,
 		private formService: FormService,
-		private locationsService: LocationsService,
-//		private router: Router
+		private locationsService: LocationsService
 	) { }
-
-	
-	/* get configurationJSON() {
-		return JSON.stringify(this.params.configuration, null, 2);
-	} */
 
 	ngOnInit(){
 		this.form = this.formService.createForm(FIELDS);
-		//this.locationsService.getCountries().subscribe(response => { console.log(response)});
-		this.locationsService.getCountries().subscribe(response => {this.countries === response});
-		//console.log(response);
-		this.countries = this.locationsService.getCountries();
-	 	 if (localStorage.getItem('providerExist') === 'true') {
+		this.locationsService.getCountries().subscribe(response => this.countries = response.data);
+		if (localStorage.getItem('providerExist') === 'true') {
 		  this.showForm();
 		}  
 	}
 
-	  createProvider() {
+	createProvider() {
 		const data = {
 		  nit: this.form.get('general').value.nit,
 		  name: this.form.get('general').value.company,
@@ -76,6 +63,7 @@ export class AppComponent{
 			email: this.form.get('contact').value.adminEmail.toLowerCase()
 		  }
 		};
+
 		this.loadingRequest = true;
 	 	this.providerService.createProvider(data, this.form.get('general').value.city).subscribe(
 		  () => {
@@ -94,10 +82,11 @@ export class AppComponent{
 			this.contentStep = 2;
 			this.isViewableContactForm = false;
 		  }
-		); 
+		);
+		
 		this.currentStep = 1;
 		this.form.reset();
-	  }  
+	}  
 
 	   showForm() {
 		this.isViewableGeneralForm = true;
@@ -130,7 +119,7 @@ export class AppComponent{
 		this.modalService.close(id);
 		if (!this.requestError) {
 		  localStorage.removeItem('providerExist');
-	//	  this.router.navigate([ROUTES.providers]);
+	// TODO moverse a el link	  this.router.navigate([ROUTES.providers]);
 		}
 	  } 
 	
