@@ -1,27 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-//import { environment } from '../environments/environment';
-import { CountryInterface } from '../interfaces/locations.interface';
+import { CityInterface, CountryInterface } from '../interfaces/locations.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocationsService {
-  constructor() { }
-  getCountries(): CountryInterface[] { 
-    let p1: CountryInterface= {id: 1 , name: 'Colombia'};
-    return [p1];
-  }
-  /* getCountries(): Observable<any> {
-    return this.http.get(`${environment.BACK_ENDPOINT}/country`);
+  constructor(private http: HttpClient) { }
+
+   getCountries(): Observable<any> {
+    return this.http.get<CountryInterface[]>(`http://localhost:8082/api/country`);
   }
 
   getRegions(countryId: number): Observable<any> {
-    return this.http.get(`${environment.BACK_ENDPOINT}/region/country/${countryId}`);
+    return this.http.get(`http://localhost:8082/api/region/country/${countryId}`);
   }
 
   getCities(regionId: number): Observable<{ data: CityInterface[] }> {
-    return this.http.get<{ data: CityInterface[] }>(`${environment.BACK_ENDPOINT}/city/region/${regionId}`);
-  } */
+    return this.http.get<{ data: CityInterface[] }>(`http://localhost:8082/api/city/region/${regionId}`);
+  } 
 }

@@ -16,20 +16,18 @@ import { FIELDS } from './constants/constants';
 declare const Liferay: any;
 
 @Component({
-	selector: 'app-root',
 	templateUrl: 
 		Liferay.ThemeDisplay.getPathContext() + 
 		'/o/mkpl-create-provider/app/app.component.html'
 })
 export class AppComponent{
 	params: LiferayParams;
-	
 	 form: FormGroup;
 	 latitude: number;
 	 longitude: number;
 	 adminEmail: string;
 	 isViewableGeneralForm = true;
-	 isViewableContactForm = true;
+	 isViewableContactForm = false;
 	 requestError = false;
 	 countries:any = [];
      cities:any = [];
@@ -48,13 +46,15 @@ export class AppComponent{
 	) { }
 
 	
-	get configurationJSON() {
+	/* get configurationJSON() {
 		return JSON.stringify(this.params.configuration, null, 2);
-	}
+	} */
 
-	ngOnInit(): void{
+	ngOnInit(){
 		this.form = this.formService.createForm(FIELDS);
-	//	this.locationsService.getCountries().subscribe(response => this.countries = response.data, () => this.countries = []);
+		//this.locationsService.getCountries().subscribe(response => { console.log(response)});
+		this.locationsService.getCountries().subscribe(response => {this.countries === response});
+		//console.log(response);
 		this.countries = this.locationsService.getCountries();
 	 	 if (localStorage.getItem('providerExist') === 'true') {
 		  this.showForm();
@@ -77,7 +77,7 @@ export class AppComponent{
 		  }
 		};
 		this.loadingRequest = true;
-	/* 	this.providerService.createProvider(data, this.form.get('general').value.city).subscribe(
+	 	this.providerService.createProvider(data, this.form.get('general').value.city).subscribe(
 		  () => {
 			this.requestError = false;
 			this.loadingRequest = false;
@@ -94,7 +94,7 @@ export class AppComponent{
 			this.contentStep = 2;
 			this.isViewableContactForm = false;
 		  }
-		); */
+		); 
 		this.currentStep = 1;
 		this.form.reset();
 	  }  
@@ -135,12 +135,12 @@ export class AppComponent{
 	  } 
 	
 	  changeCountry(value:any) {
-	//	this.locationsService.getRegions(value).subscribe(response => this.regions = response.data, () => this.regions = []);
+		this.locationsService.getRegions(value).subscribe(response => this.regions = response.data, () => this.regions = []);
 		this.form.get('general.region').setValue('');
 	  }
 	
 	  changeRegion(value:any) {
-		//this.locationsService.getCities(value).subscribe(response => this.cities = response.data, () => this.cities = []);
+		this.locationsService.getCities(value).subscribe(response => this.cities = response.data, () => this.cities = []);
 		this.form.get('general.city').setValue('');
 	  }
 }

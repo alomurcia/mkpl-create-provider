@@ -17,8 +17,9 @@
         <p class="form-subtitle text-center text-big deep-sea-green m-bottom-14">
             La siguiente es información básica y <strong class="bold">*obligatoria</strong> para la correcta creación de un proveedor.
         </p>
-        <!-- <stepper class="m-bottom-7" [currentStep]="form.invalid ? currentStep : 3" [qtySteps]="2">
-        </stepper> -->
+        <!-- TODO  -->
+        <stepper class="m-bottom-7" [currentStep]="form.invalid ? currentStep : 3" [qtySteps]="2">
+        </stepper>
         <div class="form-step-container width-100 column">
             <!-- Step 1 -->
             <div *ngIf="isViewableGeneralForm" formGroupName="general">
@@ -84,14 +85,14 @@
 </div>
 
 <modal id="modal-provider" classContent="modal-content" (closeModal)="closeModal('modal-provider')" applyPadding>
-    <div class="modal-content column center">
+    <div class="form-container center column middle">
         <div class="header-content width-100 row center middle m-bottom-4">
-            <img class="modal-img" [src]="requestError ? 'assets/icons/doc-error.svg' : 'assets/icons/doc-success.svg'" alt="Estado" />
+            <img class="modal-img" [src]="requestError ? '/o/mkpl-create-provider/icons/doc-error.svg' : '/o/mkpl-create-provider/icons/doc-success.svg'" alt="Estado" />
         </div>
-        <h2 class="general-title text-center poppins bold m-bottom-4" [ngClass]="{ 'deep-sea-green ': !requestError, 'text-error' : requestError }">
+        <h2 class="general-title text-center poppins bold m-bottom-4 center column middle" [ngClass]="{ 'deep-sea-green ': !requestError, 'text-error' : requestError }">
             {{requestError ? '¡Los datos no se guardaron!' : '¡Datos creados!'}}
         </h2>
-        <p class="form-subtitle description m-bottom-9 text-center" [ngClass]="{ 'deep-sea-green ': !requestError, 'text-error' : requestError }">
+        <p class="form-subtitle description m-bottom-9 text-center center column middle" [ngClass]="{ 'deep-sea-green ': !requestError, 'text-error' : requestError }">
             {{requestError ? 'Los datos ingresados no fueron guardados, por favor inténtalo nuevamente.' : 'Los datos ingresados se guardaron con éxito'}}
         </p>
         <button class="button-primary m-bottom-9" (click)="closeModal('modal-provider')" type="button">

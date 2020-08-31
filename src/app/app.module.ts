@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { InputControlComponent } from './input-control.component';
 import { SelectControlComponent } from './select-control.component';
 import { ModalComponent } from './modal.component';
+import { StepperComponent } from './stepper.component';
 
 @NgModule({
 	imports: [
@@ -19,12 +20,14 @@ import { ModalComponent } from './modal.component';
 		AppComponent,
 		ModalComponent,
 		InputControlComponent, 
-		SelectControlComponent
+		SelectControlComponent,
+		StepperComponent
 	],
 	exports: [
 		InputControlComponent, 
 		SelectControlComponent,
-		ModalComponent
+		ModalComponent,
+		StepperComponent
 	],
 	entryComponents: [AppComponent],
 	bootstrap: [], // Don't bootstrap any component statically (see ngDoBootstrap() below)
