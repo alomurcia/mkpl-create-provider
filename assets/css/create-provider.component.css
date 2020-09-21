@@ -34,6 +34,10 @@
     padding: 0 160px;
 }
 
+.form-subtitle.description {
+    padding: 0;
+}
+
 .form-step-container {
     padding: 0 160px 18px;
 }
@@ -43,7 +47,7 @@
     padding: 24px 160px 0 24px;
 }
 
-.modal-content {
+.modal-content-create-prov {
     max-width: 100%;
     width: 560px;
 }
@@ -57,4 +61,8 @@
     height: 170px;
     object-fit: contain;
     width: 175px;
+}
+
+.column.no-float {
+  float: none;
 }

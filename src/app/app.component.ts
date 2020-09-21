@@ -45,7 +45,7 @@ export class AppComponent{
 		this.locationsService.getCountries().subscribe(response => this.countries = response.data);
 		if (localStorage.getItem('providerExist') === 'true') {
 		  this.showForm();
-		}  
+		}
 	}
 
 	createProvider() {
@@ -119,7 +119,8 @@ export class AppComponent{
 		this.modalService.close(id);
 		if (!this.requestError) {
 		  localStorage.removeItem('providerExist');
-	// TODO moverse a el link	  this.router.navigate([ROUTES.providers]);
+		  // TODO se cambia link, ver si funciona	  this.router.navigate([ROUTES.providers]);
+		  window.location.href = "/providers";
 		}
 	  } 
 	

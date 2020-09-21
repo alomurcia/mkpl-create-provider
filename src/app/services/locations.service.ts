@@ -9,7 +9,9 @@ import { CityInterface, CountryInterface } from '../interfaces/locations.interfa
 export class LocationsService {
   constructor(private http: HttpClient) { }
 
-   getCountries(): Observable<any> {
+  // TODO actualizar endpoints
+
+  getCountries(): Observable<any> {
     return this.http.get<any[]>(`http://localhost:8082/api/country`);
   }
 

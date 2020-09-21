@@ -87,3 +87,7 @@
     letter-spacing: 0.62px;
     line-height: 20px;
 }
+
+.li-style {
+    list-style-type: none;
+}
