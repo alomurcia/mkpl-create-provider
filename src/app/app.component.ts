@@ -42,7 +42,7 @@ export class AppComponent{
 
 	ngOnInit(){
 		this.form = this.formService.createForm(FIELDS);
-		this.locationsService.getCountries().subscribe(response => this.countries = response.data);
+		this.locationsService.getCountries().subscribe(response => this.countries = response);
 		if (localStorage.getItem('providerExist') === 'true') {
 		  this.showForm();
 		}
@@ -125,12 +125,12 @@ export class AppComponent{
 	  } 
 	
 	  changeCountry(value:any) {
-		this.locationsService.getRegions(value).subscribe(response => this.regions = response.data, () => this.regions = []);
+		this.locationsService.getRegions(value).subscribe(response => this.regions = response, () => this.regions = []);
 		this.form.get('general.region').setValue('');
 	  }
 	
 	  changeRegion(value:any) {
-		this.locationsService.getCities(value).subscribe(response => this.cities = response.data, () => this.cities = []);
+		this.locationsService.getCities(value).subscribe(response => this.cities = response, () => this.cities = []);
 		this.form.get('general.city').setValue('');
 	  }
 }
