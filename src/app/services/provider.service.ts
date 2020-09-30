@@ -18,7 +18,7 @@ export class ProviderService {
 
   createProvider(data: any, cityId: string): Observable<any> {
    return this.http.post(
-      `http://localhost:8080/o/ProviderCompraDigitalPortlet/api/provider?city_id=${cityId}`,
+      `/o/ProviderCompraDigitalPortlet/api/provider?city_id=${cityId}`,
       data
     );
   }
